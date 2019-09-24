@@ -48,32 +48,24 @@ class MyGame(arcade.Window):
 
         character_scale = 0.75
         self.player.stand_right_textures = [] #character will face right, until player switches to left
-        self.player.stand_right_textures.append(arcade.load_texture("Images/Poses/adventurer_stand.png",
+        self.player.stand_right_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_stand.png",
                                                                     scale=character_scale))
         self.player.stand_left_textures = []
-        self.player.stand_left_textures.append(arcade.load_texture("Images/Poses/adventurer_stand.png",
+        self.player.stand_left_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_stand.png",
                                                                    scale=character_scale, mirrored=True))
 
-        self.player.walk_right_textures = [] #when player moves, so will the sprite
+        self.player.walk_right_textures = [] #when player moves right, so will the sprite
 
-        self.player.walk_right_textures.append(arcade.load_texture("images/character_sprites/characterw0.png",
+        self.player.walk_right_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_walk1.png",
                                                                    scale=character_scale))
-        self.player.walk_right_textures.append(arcade.load_texture("images/character_sprites/characterw1.png",
-                                                                   scale=character_scale))
-        self.player.walk_right_textures.append(arcade.load_texture("images/character_sprites/characterw2.png",
-                                                                   scale=character_scale))
-        self.player.walk_right_textures.append(arcade.load_texture("images/character_sprites/characterw3.png",
+        self.player.walk_right_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_walk2.png",
                                                                    scale=character_scale))
 
-        self.player.walk_left_textures = []
+        self.player.walk_left_textures = [] #player movement to the left 
 
-        self.player.walk_left_textures.append(arcade.load_texture("images/character_sprites/characterw0.png",
+        self.player.walk_left_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_walk1.png",
                                                                   scale=character_scale, mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("images/character_sprites/characterw1.png",
-                                                                  scale=character_scale, mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("images/character_sprites/characterw2.png",
-                                                                  scale=character_scale, mirrored=True))
-        self.player.walk_left_textures.append(arcade.load_texture("images/character_sprites/characterw3.png",
+        self.player.walk_left_textures.append(arcade.load_texture("Images/PNG/Adventurer/Poses/adventurer_walk2.png",
                                                                   scale=character_scale, mirrored=True))
 
         self.player.texture_change_distance = 20
@@ -84,18 +76,18 @@ class MyGame(arcade.Window):
 
         self.player_list.append(self.player)
 
-        for i in range(COIN_COUNT):
+        for i in range(COIN_COUNT): #Adding coin list
             coin = arcade.AnimatedTimeSprite(scale=0.5)
             coin.center_x = random.randrange(SCREEN_WIDTH)
             coin.center_y = random.randrange(SCREEN_HEIGHT)
 
             coin.textures = []
-            coin.textures.append(arcade.load_texture("images/gold_1.png", scale=COIN_SCALE))
-            coin.textures.append(arcade.load_texture("images/gold_2.png", scale=COIN_SCALE))
-            coin.textures.append(arcade.load_texture("images/gold_3.png", scale=COIN_SCALE))
-            coin.textures.append(arcade.load_texture("images/gold_4.png", scale=COIN_SCALE))
-            coin.textures.append(arcade.load_texture("images/gold_3.png", scale=COIN_SCALE))
-            coin.textures.append(arcade.load_texture("images/gold_2.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_40.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_35.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_30.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_25.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_20.png", scale=COIN_SCALE))
+            coin.textures.append(arcade.load_texture("puzzle-pack-ii/PNG/Coins/coin_15.png", scale=COIN_SCALE))
             coin.cur_texture_index = random.randrange(len(coin.textures))
 
             self.coin_list.append(coin)
@@ -119,12 +111,12 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
-    def on_key_press(self, key, modifiers):
+    def on_key_press(self, key, modifiers): #calls on key press
         """
-        Called whenever a key is pressed.
+        Called whenever a key is pressed. 
         """
         if key == arcade.key.UP:
-            self.player.change_y = MOVEMENT_SPEED
+            self.player.change_y = MOVEMENT_SPEED #these 4 are the keys you can press, defines it
         elif key == arcade.key.DOWN:
             self.player.change_y = -MOVEMENT_SPEED
         elif key == arcade.key.LEFT:
@@ -132,7 +124,7 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.player.change_x = MOVEMENT_SPEED
 
-    def on_key_release(self, key, modifiers):
+    def on_key_release(self, key, modifiers): #when no key is pressed player stops
         """
         Called when the user releases a key.
         """
@@ -141,10 +133,10 @@ class MyGame(arcade.Window):
         elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
             self.player.change_x = 0
 
-    def update(self, delta_time):
+    def update(self, delta_time): #updates animations of player and selected coins
         """ Movement and game logic """
 
-        self.coin_list.update()
+        self.coin_list.update() 
         self.coin_list.update_animation()
         self.player_list.update()
         self.player_list.update_animation()
