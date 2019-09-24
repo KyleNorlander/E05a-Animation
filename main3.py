@@ -34,7 +34,7 @@ class MyGame(arcade.Window):
         self.player_list = None
         self.coin_list = None
 
-        # Set up the player
+        # Sets up the player
         self.score = 0
         self.player = None
 
@@ -42,7 +42,7 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
 
-        # Set up the player
+        # Sets up the player walking animations
         self.score = 0
         self.player = arcade.AnimatedWalkingSprite()
 
